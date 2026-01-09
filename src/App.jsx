@@ -9,16 +9,13 @@ import { AddCampaignPage } from './pages/AddPage.jsx';
 function App() {
   const [balance, setBalance] = useState(0);
 
-  useEffect(() => {
-    const fetchBalance = async () => {
-      try {
-        const data = await getAccountBalance();
-        setBalance(data);
-      } catch (err) {
-        console.error("Błąd pobierania salda:", err);
+useEffect(() => {
+    const unsubscribe = getAccountBalance((data) => {
+      if (data && data.balance !== undefined) {
+        setBalance(data.balance);
       }
-    };
-    fetchBalance();
+    });
+    return () => unsubscribe();
   }, []);
 
   return (

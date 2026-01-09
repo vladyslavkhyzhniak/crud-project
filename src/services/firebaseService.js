@@ -1,5 +1,6 @@
 import { db } from "../firebase";
 import {
+    onSnapshot,
     collection,
     getDocs,
     getDoc,
@@ -79,14 +80,14 @@ export const updateCampaign = async (id, updatedCampaign) => {
     return await updateDoc(campaignRef, updatedCampaign);
 }
 
-export const getAccountBalance = async () => {
-    const accountRef = doc(db, "settings", "emeraldAccount");
-    const accountSnap = await getDoc(accountRef);
-    if (accountSnap.exists()) {
-        return Number(accountSnap.data().balance);
-    } else {
-        throw new Error("Brak konta o podanym ID");
+export const getAccountBalance = (onUpdate) => {
+   const docRef = doc(db, "settings", "emeraldAccount");
+  const unsubscribe = onSnapshot(docRef, (docSnap) => {
+    if (docSnap.exists()) {
+      onUpdate(docSnap.data());
     }
+  });
+  return unsubscribe;
 }
 export const getCities = async () => {
     try {
