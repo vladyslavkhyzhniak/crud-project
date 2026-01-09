@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { getCampaigns } from '../services/firebaseService.js';
+import { getCampaigns, deleteCampaign } from '../services/firebaseService.js';
 import { CampaignCard } from '../components/campaignCard.jsx';
 import { CampaignDetailModal } from '../components/campaignDetailModal.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
     const [campaigns, setCampaigns] = useState([]);
@@ -23,6 +24,15 @@ export const HomePage = () => {
         fetchData();
     }, []);
 
+    const handleDeleteCampaign = async (campaignId) => {
+        try {
+            await deleteCampaign(campaignId);
+            setSelectedCampaign(null);
+            setCampaigns((prevCampaigns) => prevCampaigns.filter(camp => camp.id !== campaignId));
+        } catch (error) {
+            alert("Wystąpił błąd podczas usuwania kampanii.");
+        }
+    };
     if (loading) {
         return (
             <div className="flex justify-center items-center h-64">
@@ -64,6 +74,7 @@ export const HomePage = () => {
             <CampaignDetailModal 
                 campaign={selectedCampaign} 
                 onClose={() => setSelectedCampaign(null)} 
+                onDelete={handleDeleteCampaign}
             />
         </div>
     );

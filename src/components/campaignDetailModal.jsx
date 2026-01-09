@@ -1,12 +1,17 @@
 import { createPortal } from 'react-dom';
 
-export const CampaignDetailModal = ({ campaign, onClose }) => {
+export const CampaignDetailModal = ({ campaign, onClose, onDelete }) => {
   if (!campaign) return null;
 
   const formattedFund = new Intl.NumberFormat('pl-PL', {
     style: 'currency',
     currency: 'PLN'
   }).format(campaign.fund);
+
+  const Hadnde_Delete = () => {
+    onDelete(campaign.id);
+    onClose();
+  }
 
   return createPortal(
     <div 
@@ -84,8 +89,13 @@ export const CampaignDetailModal = ({ campaign, onClose }) => {
           >
             Zamknij
           </button>
+          <button 
+            onClick={Hadnde_Delete}
+            className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 font-medium bg-red-400 hover:bg-red-500 text-white rounded-lg transition-colors"
+          >
+            Usuń
+          </button>
         </div>
-
       </div>
     </div>,
     document.body
