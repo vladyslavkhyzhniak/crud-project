@@ -6,7 +6,7 @@ import { addCampaign } from '../services/firebaseService';
 export const AddCampaignPage = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [isError , setError] = useState(null);
 
   const handleAddSubmit = async (formData) => {
     setIsSubmitting(true);
@@ -15,9 +15,8 @@ export const AddCampaignPage = () => {
 
       navigate('/');
     } catch (error) {
-      console.error("Błąd dodawania:", error);
+      setError(error);
       
-      alert(typeof error === 'string' ? error : "Wystąpił błąd podczas tworzenia kampanii.");
     } finally {
       setIsSubmitting(false);
     }
@@ -26,6 +25,7 @@ export const AddCampaignPage = () => {
   return (
     <div className="max-w-2xl mx-auto py-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-2">Nowa Kampania</h1>
+      {isError && <p className="text-red-500 mb-4 bg-red-300 p-2 rounded w-1/2">{isError}</p>}
 
       <CampaignForm 
         onSubmit={handleAddSubmit} 
