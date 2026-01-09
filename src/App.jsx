@@ -4,6 +4,7 @@ import { Layout } from './layout/layout.jsx';
 import { HomePage } from './pages/homePage';
 import { getAccountBalance } from './services/firebaseService.js';
 import { EditCampaignPage } from './pages/editPage.jsx';
+import { AddCampaignPage } from './pages/AddPage.jsx';
 
 function App() {
   const [balance, setBalance] = useState(0);
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Layout balance={balance} />}>
           <Route index element={<HomePage />} />
           <Route path="edit/:id" element={<EditCampaignPage />} />
+          <Route path="add" element={<AddCampaignPage />} />
         </Route>
       </Routes>
   );

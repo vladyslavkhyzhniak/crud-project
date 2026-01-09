@@ -37,9 +37,11 @@ export const HomePage = () => {
                 <div>
                     <h1 className="text-3xl font-bold text-gray-900">Twoje Kampanie</h1>
                 </div>
+                <a href="/add">
                 <button className="px-5 py-2.5 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors shadow-lg shadow-gray-900/20 flex items-center gap-2">
                     <span>+</span> Dodaj Kampanię
                 </button>
+                </a>
             </div>
 
             {campaigns.length > 0 ? (
