@@ -48,7 +48,7 @@ export const deleteCampaign = async (id) => {
         if (!accountDoc.exists()) {
             throw "Błąd: Konto Emerald nie istnieje!";
         }
-        
+
         const currentBalance = Number(accountDoc.data().balance);
         const campaignFund = Number(campaignDoc.data().fund);
 
@@ -88,3 +88,13 @@ export const getAccountBalance = async () => {
         throw new Error("Brak konta o podanym ID");
     }
 }
+export const getCities = async () => {
+    try {
+        const docRef = doc(db, "settings", "config");
+        const docSnap = await getDoc(docRef);
+        return docSnap.data().towns;
+    } catch (error) {
+        console.error("Błąd pobierania miast:", error);
+        return ["Warszawa"];
+    }
+};
