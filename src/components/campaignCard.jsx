@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const CampaignCard = ({ campaign }) => {
+export const CampaignCard = ({ campaign, onDetailsClick }) => {
   const navigate = useNavigate();
   const { id, name, fund, town } = campaign;
 
@@ -33,7 +33,7 @@ export const CampaignCard = ({ campaign }) => {
 
       <div className="flex gap-3 md:w-auto w-full">
         <button 
-          onClick={() => navigate(`/campaign/${id}`)}
+          onClick={() => onDetailsClick(campaign)}
           className="flex-1 md:flex-none px-4 py-2 text-sm font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-gray-900 transition-colors"
         >
           Szczegóły

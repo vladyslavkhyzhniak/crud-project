@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getCampaigns } from '../services/firebaseService.js';
 import { CampaignCard } from '../components/campaignCard.jsx';
+import { CampaignDetailModal } from '../components/campaignDetailModal.jsx';
 
 export const HomePage = () => {
     const [campaigns, setCampaigns] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const [selectedCampaign, setSelectedCampaign] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,7 +45,10 @@ export const HomePage = () => {
             {campaigns.length > 0 ? (
                 <div className="flex flex-col gap-4">
                     {campaigns.map((camp) => (
-                        <CampaignCard key={camp.id} campaign={camp} />
+                        <CampaignCard 
+                        key={camp.id}
+                        campaign={camp}
+                        onDetailsClick={(campaign) => setSelectedCampaign(campaign)} />
                     ))}
                 </div>
             ) : (
@@ -53,6 +59,10 @@ export const HomePage = () => {
                     <h3 className="text-lg font-medium text-gray-900">Brak aktywnych kampanii</h3>
                 </div>
             )}
+            <CampaignDetailModal 
+                campaign={selectedCampaign} 
+                onClose={() => setSelectedCampaign(null)} 
+            />
         </div>
     );
 };
