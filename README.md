@@ -1,4 +1,4 @@
-Projekt wykonany jako rozwiązanie zadania rekrutacyjnego. Aplikacja typu służąca do zarządzania kampaniami reklamowymi z symulacją budżetu w czasie rzeczywistym.
+Projekt wykonany jako rozwiązanie zadania rekrutacyjnego. Aplikacja służąca do zarządzania kampaniami reklamowymi z symulacją budżetu w czasie rzeczywistym.
 
 [**🔗 ZOBACZ DEMO LIVE (Netlify)**](https://crud-project1.netlify.app/)
 
